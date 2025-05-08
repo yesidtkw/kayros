@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volante KAYROS</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #dbeafe, #f0f9ff);
+      color: #0f172a;
+    }
+    .flyer {
+      width: 700px;
+      margin: 40px auto;
+      padding: 30px;
+      background: white;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+      text-align: center;
+      background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+      background-repeat: repeat;
+    }
+    .flyer h1 {
+      font-size: 56px;
+      color: #2563eb;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .flyer p {
+      font-size: 20px;
+      margin: 10px 0;
+      color: #475569;
+    }
+    .services {
+      margin-top: 30px;
+      font-size: 22px;
+    }
+    .services ul {
+      list-style: none;
+      padding: 0;
+    }
+    .services li {
+      margin: 15px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+    }
+    .services li::before {
+      content: "\1F4F1"; /* Icono de celular por defecto */
+      margin-right: 12px;
+      font-size: 26px;
+    }
+    .services li:nth-child(1)::before {
+      content: "\1F4BB"; /* Laptop */
+    }
+    .services li:nth-child(2)::before {
+      content: "\1F4F1"; /* Celular */
+    }
+    .services li:nth-child(3)::before {
+      content: "\1F4D0"; /* Tablet como símbolo de estudio */
+    }
+    .technical {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #1e293b;
+      background: #dbeafe;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="flyer">
+  <h1>KAYROS</h1>
+  <p><strong>Dirección:</strong> Calle 15 No. 8A - 22 Local 26 C.C. San Francisco Bogotá D.C.</p>
+  <p><strong>Teléfono:</strong> 3004451636</p>
+
+  <div class="services">
+    <p><strong>Venta de:</strong></p>
+    <ul>
+      <li>Portátiles</li>
+      <li>Celulares</li>
+      <li>Tablets</li>
+    </ul>
+  </div>
+
+  <div class="technical">
+    <p><strong>Servicio Técnico:</strong> Cambio de pantalla, limpieza, reparación de puertos, cambio de batería, etc.</p>
+  </div>
+</div>
+
+</body>
+</html>

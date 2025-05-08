@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TenoPlus - Gestión de Productos Malos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f4; }
+    nav {
+        background: #6f42c1; /* antes: #0d6efd */
+        color: white;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    nav img {
+        height: 40px;
+        transition: transform 0.3s ease;
+    }
+    nav img:hover {
+        transform: scale(1.1) rotate(-2deg);
+    }
+    nav span {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .producto {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        padding: 15px;
+        margin: 10px;
+        transition: transform 0.2s ease;
+    }
+    .producto:hover {
+        transform: translateY(-5px);
+    }
+    #listaProductos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f6fa;
+      color: #333;
+    }
+    header {
+      background: #7b2cbf; /* antes: #0073e6 */
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    form input, form button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    form button {
+      background-color: #7b2cbf; /* antes: #0073e6 */
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    form button:hover {
+      background-color: #5a189a; /* antes: #005bb5 */
+    }
+    .producto {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .producto h3 {
+      margin: 0 0 10px;
+    }
+    .producto img {
+      max-width: 100px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .producto button {
+      margin-right: 10px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .editar {
+      background-color: #28a745;
+      color: white;
+    }
+    .eliminar {
+      background-color: #dc3545;
+      color: white;
+    }
+    @media (max-width: 600px) {
+      form, .producto {
+        padding: 15px;
+      }
+      form input, form button {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav style="background:#0d6efd;color:white;padding:15px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;position:relative;">
+
+    <div style="display:flex;align-items:center;gap:10px;">
+      <img src="kayros_logo.png" alt="Kayros Logo" />
+      <span>TenoPlus</span>
+    </div>
+
+    <div id="menuToggle" onclick="toggleMenu()" style="display:none;cursor:pointer;font-size:24px;">☰</div>
+    <div id="navLinks" style="display:flex;gap:15px;flex-wrap:wrap;">
+      <a href="#" style="color:white;text-decoration:none;">Inicio</a>
+      <a href="#seccionTienda" style="color:white;text-decoration:none;">Tienda</a>
+      <a href="#seccionContacto" style="color:white;text-decoration:none;">Contacto</a>
+    </div>
+  </nav>
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    // Mostrar menú hamburguesa si pantalla es pequeña
+    window.addEventListener('resize', () => {
+      const toggle = document.getElementById('menuToggle');
+      const links = document.getElementById('navLinks');
+      if (window.innerWidth <= 600) {
+        toggle.style.display = 'block';
+        links.style.display = 'none';
+      } else {
+        toggle.style.display = 'none';
+        links.style.display = 'flex';
+      }
+    });
+    window.dispatchEvent(new Event('resize'));
+  </script>
+
+
+
+
+    <div style="display:flex;gap:15px;">
+      <a href="#" style="color:white;text-decoration:none;">Inicio</a>
+      <a href="#seccionTienda" style="color:white;text-decoration:none;">Tienda</a>
+      <a href="#seccionContacto" style="color:white;text-decoration:none;">Contacto</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>TenoPlus - Gestión de Productos Malos</h1>
+  </header>
+  <main>
+    <form id="formProducto">
+      <input type="hidden" id="id">
+      <input type="text" id="nombre" placeholder="Nombre" required />
+      <input type="text" id="marca" placeholder="Marca" required />
+      <input type="text" id="categoria" placeholder="Categoría" required />
+      <input type="text" id="condicion" placeholder="Condición" required />
+      <input type="number" id="precio" step="0.01" placeholder="Precio" required />
+      <input type="text" id="imagen" placeholder="URL de imagen" />
+      <button type="submit">Guardar Producto</button>
+    </form>
+
+
+    <div id="seccionTienda" style="background:white;padding:15px;border-radius:12px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,0.1);">
+      <h3>Filtrar productos Malos</h3>
+      <input type="text" id="filtroNombre" placeholder="Nombre..." />
+      <input type="text" id="filtroMarca" placeholder="Marca..." />
+      <input type="text" id="filtroCategoria" placeholder="Categoría..." />
+      <input type="number" id="filtroPrecio" step="0.01" placeholder="Precio máximo..." />
+<button id="limpiarFiltros" style="margin-top:10px;background:#6c757d;color:white;border:none;padding:10px;border-radius:6px;cursor:pointer;">Limpiar Filtros</button>
+    </div>
+    <div id="listaProductos"></div>
+
+  </main>
+
+  <script>
+    const form = document.getElementById('formProducto');
+    const lista = document.getElementById('listaProductos');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const id = document.getElementById('id').value;
+      const producto = {
+        id: id,
+        nombre: document.getElementById('nombre').value,
+        marca: document.getElementById('marca').value,
+        categoria: document.getElementById('categoria').value,
+        condicion: document.getElementById('condicion').value,
+        precio: parseFloat(document.getElementById('precio').value),
+        imagen: document.getElementById('imagen').value
+      };
+
+      const url = id ? 'actualizar_productomalos.php' : 'crear_productomalos.php';
+
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(producto)
+      })
+      .then(res => res.json())
+      .then(() => {
+        form.reset();
+        document.getElementById('id').value = '';
+        cargarProductos();
+      });
+    });
+
+    function cargarProductos() {
+      fetch('listar_productosmalos.php')
+        .then(res => res.json())
+        .then(data => {
+          lista.innerHTML = '';
+          data.forEach(p => {
+            const div = document.createElement('div');
+            div.className = 'producto';
+            div.innerHTML = `
+              <h3>${p.nombre}</h3>
+              <p><strong>Marca:</strong> ${p.marca}</p>
+              <p><strong>Categoría:</strong> ${p.categoria}</p>
+              <p><strong>Condición:</strong> ${p.condicion}</p>
+              <p><strong>Precio:</strong> $${p.precio}</p>
+              ${p.imagen ? `<img src="${p.imagen}" alt="${p.nombre}">` : ''}
+              <button onclick='editarProducto(${JSON.stringify(p)})' class="editar">Editar</button>
+              <button onclick="eliminarProducto(${p.id})" class="eliminar">Eliminar</button>
+            `;
+            lista.appendChild(div);
+          });
+        });
+    }
+
+    function editarProducto(p) {
+      document.getElementById('id').value = p.id;
+      document.getElementById('nombre').value = p.nombre;
+      document.getElementById('marca').value = p.marca;
+      document.getElementById('categoria').value = p.categoria;
+      document.getElementById('condicion').value = p.condicion;
+      document.getElementById('precio').value = p.precio;
+      document.getElementById('imagen').value = p.imagen;
+    }
+
+    function eliminarProducto(id) {
+      if (!confirm('¿Estás seguro de eliminar este producto?')) return;
+
+      fetch('eliminar_productomalo.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+      })
+      .then(res => res.json())
+      .then(() => cargarProductos());
+    }
+
+
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('limpiarFiltros').addEventListener('click', () => {
+        document.getElementById('filtroNombre').value = '';
+        document.getElementById('filtroMarca').value = '';
+        document.getElementById('filtroCategoria').value = '';
+        document.getElementById('filtroPrecio').value = '';
+        cargarProductos();
+      });
+
+      cargarProductos();
+      document.getElementById('filtroNombre').addEventListener('input', cargarProductos);
+      document.getElementById('filtroMarca').addEventListener('input', cargarProductos);
+      document.getElementById('filtroCategoria').addEventListener('input', cargarProductos);
+      document.getElementById('filtroPrecio').addEventListener('input', cargarProductos);
+    });
+
+    function cumpleFiltros(p) {
+      const nombre = document.getElementById('filtroNombre').value.toLowerCase();
+      const marca = document.getElementById('filtroMarca').value.toLowerCase();
+      const categoria = document.getElementById('filtroCategoria').value.toLowerCase();
+      const precioMax = parseFloat(document.getElementById('filtroPrecio').value);
+
+      return (!nombre || p.nombre.toLowerCase().includes(nombre)) &&
+             (!marca || p.marca.toLowerCase().includes(marca)) &&
+             (!categoria || p.categoria.toLowerCase().includes(categoria)) &&
+             (!precioMax || p.precio <= precioMax);
+    }
+
+    function cargarProductos() {
+      fetch('listar_productosmalos.php')
+        .then(res => res.json())
+        .then(data => {
+          lista.innerHTML = '';
+          data.filter(cumpleFiltros).forEach(p => {
+            const div = document.createElement('div');
+            div.className = 'producto';
+            div.innerHTML = `
+              <h3>${p.nombre}</h3>
+              <p><strong>Marca:</strong> ${p.marca}</p>
+              <p><strong>I<strong>Marca:</strong> ${p.marca} | ID:</strong> ${p.id}</p>
+              <p><strong>Categoría:</strong> ${p.categoria}</p>
+              <p><strong>Condición:</strong> ${p.condicion}</p>
+              <p><strong>Precio:</strong> $${p.precio}</p>
+              ${p.imagen ? `<img src="${p.imagen}" alt="${p.nombre}">` : ''}
+              <button onclick='editarProducto(${JSON.stringify(p)})' class="editar">Editar</button>
+              <button onclick="eliminarProducto(${p.id})" class="eliminar">Eliminar</button>
+            `;
+            lista.appendChild(div);
+          });
+        });
+    }
+
+  </script>
+
+  <footer id="seccionContacto" style="background:#f1f1f1;color:#333;padding:20px;margin-top:40px;text-align:center;border-top:1px solid #ddd;">
+    <p><strong>Dirección:</strong> Calle 15 No. 8A-22 C.C. San Francisco Local 26 Bogotá Colombia</p>
+    <p><strong>Teléfono:</strong> +57 300 4451636</p>
+    <p><strong>Email:</strong> martinezcorreayesid@gmail.com</p>
+    <p style="font-size:14px;color:#777;">&copy; 2025 TenoPlus. Todos los derechos reservados.</p>
+  </footer>
+</body>
+
+</html>

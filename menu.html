@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Menú Vertical Oscuro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212; /* fondo oscuro */
+      color: #f0f0f0;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    nav {
+      background-color: #1e1e1e;
+      padding: 30px 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      width: 100%;
+      max-width: 300px;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      margin-bottom: 15px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #ffffff;
+      background-color: #333333;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    nav ul li a:hover {
+      background-color: #444444;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        padding: 20px 15px;
+      }
+      nav ul li a {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="admin.html">Admin</a></li>
+      <li><a href="admine.html">Productos</a></li>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="registros.php">Registros</a></li>
+      <li><a href="adminmalos.html">Admin Malos</a></li>
+      <li><a href="adminpartes.html">Admin Partes</a></li>
+      <li><a href="rotulos.php">Rótulos</a></li>
+      <li><a href="rotulosmalos.php">Rótulos Malos</a></li>
+      <li><a href="rotulospartes.php">Rótulos Partes</a></li>
+    </ul>
+  </nav>
+
+</body>
+</html>
